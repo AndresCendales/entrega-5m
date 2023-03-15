@@ -19,24 +19,27 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
             Inicio(index=0),
             Transaccion(
                 index=1,
-                # comando=CrearOrden,
+                comando=None, #
                 evento=OrdenCreada,
                 error=None,
-                compensacion=None
+                compensacion=None,
+                exitosa=True
             ),
             Transaccion(
                 index=2,
-                # comando=ProgramarRuta,
-                # evento=EventoRutaProgramada,
+                comando=None, #
+                evento=None,#
                 error=None,
-                compensacion=None
+                compensacion=None,
+                exitosa=True
             ),
             Transaccion(
                 index=3,
-                # comando=AsignarRuta,
-                # evento=EventoRutaAsignada,
+                comando=None,#
+                evento=None,#
                 error=None,
-                compensacion=None
+                compensacion=None,
+                exitosa=True
             ),
             Fin(index=5)
         ]
@@ -73,6 +76,7 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
 def oir_mensaje(mensaje):
     if isinstance(mensaje, EventoDominio):
         coordinador = CoordinadorOrdenes()
+        coordinador.inicializar_pasos()
         coordinador.procesar_evento(mensaje)
     else:
         raise NotImplementedError("El mensaje no es evento de Dominio")

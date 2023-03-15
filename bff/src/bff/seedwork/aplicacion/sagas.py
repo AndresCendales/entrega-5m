@@ -52,7 +52,7 @@ class Inicio(Paso):
 
 @dataclass
 class Fin(Paso):
-    ...
+    index: int = 0
 
 
 @dataclass
