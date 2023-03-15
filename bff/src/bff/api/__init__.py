@@ -23,13 +23,13 @@ def comenzar_consumidor(app):
     """
 
     import threading
-    import drivers.modulos.drivers.infraestructura.consumidores as vuelos
+    import src.bff.modulos.sagas.infraestructura.consumidores as vuelos
 
     # Suscripción a eventos
     threading.Thread(target=vuelos.suscribirse_a_eventos, args=[app]).start()
 
     # Suscripción a comandos
-    threading.Thread(target=vuelos.suscribirse_a_comandos, args=[app]).start()
+    # threading.Thread(target=vuelos.suscribirse_a_comandos, args=[app]).start()
 
 
 def create_app(configuracion={}):
@@ -41,14 +41,16 @@ def create_app(configuracion={}):
     app.config['TESTING'] = configuracion.get('TESTING')
 
     # Inicializa la DB
-    from drivers.config.db import init_db, database_connection
+    import sys
+    sys.path.append('..')
+    from bff.src.config.db import init_db, database_connection
 
     app.config['SQLALCHEMY_DATABASE_URI'] = database_connection(configuracion, basedir=basedir)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     init_db(app)
 
-    from drivers.config.db import db
+    from bff.src.config.db import db
 
     importar_modelos_alchemy()
     registrar_handlers()
@@ -62,7 +64,7 @@ def create_app(configuracion={}):
     from . import bff
 
     # Registro de Blueprints
-    app.register_blueprint(drivers.bp)
+    app.register_blueprint(bff.bp)
 
     @app.route("/spec")
     def spec():
