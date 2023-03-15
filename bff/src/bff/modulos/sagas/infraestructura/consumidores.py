@@ -7,6 +7,7 @@ import traceback
 import datetime
 
 from bff.src.bff.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
+from bff.src.bff.modulos.ordenes.dominio.eventos import OrdenCreada
 # from alpesonline.modulos.ordenes.infraestructura.schema.v1.comandos import ComandoCrearOrden
 
 # from alpesonline.modulos.ordenes.infraestructura.proyecciones import ProyeccionOrdenesLista
@@ -24,8 +25,15 @@ def suscribirse_a_eventos(app=None):
         )
         while True:
             mensaje = consumidor.receive()
-            oir_mensaje(mensaje)
             datos = mensaje.value().data
+            oir_mensaje(OrdenCreada(
+                id=uuid.uuid4(),
+                id_orden=datos.id_orden,
+                id_cliente=datos.id_cliente,
+                tipo=datos.tipo,
+                productos=[],
+                fecha_creacion=datetime.datetime.fromtimestamp(datos.fecha_creacion / 1000.0)
+            ))
             print(f'Evento recibido: {datos}')
 
             # TODO: agregar los demas campos para guardar en BD
