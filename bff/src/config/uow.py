@@ -1,5 +1,5 @@
-from alpesonline.config.db import db
-from alpesonline.seedwork.infraestructura.uow import UnidadTrabajo, Batch
+from bff.src.config.db import db
+from bff.src.bff.seedwork.infraestructura.uow import UnidadTrabajo, Batch
 from pydispatch import dispatcher
 
 import logging

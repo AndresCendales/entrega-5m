@@ -1,9 +1,9 @@
-from alpesonline.seedwork.aplicacion.queries import Query, QueryResultado
-from alpesonline.seedwork.aplicacion.queries import ejecutar_query as query
-from alpesonline.modulos.drivers.dominio.entidades import Ruta
+from bff.src.bff.seedwork.aplicacion.queries import Query, QueryResultado
+from bff.src.bff.seedwork.aplicacion.queries import ejecutar_query as query
+from bff.src.bff.modulos.drivers.dominio.entidades import Ruta
 from dataclasses import dataclass
 from .base import ReservaQueryBaseHandler
-from alpesonline.modulos.drivers.aplicacion.mapeadores import MapeadorRuta
+from bff.src.bff.modulos.drivers.aplicacion.mapeadores import MapeadorRuta
 
 
 @dataclass

@@ -62,13 +62,16 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
         ...
 
     def construir_comando(self, evento: EventoDominio, tipo_comando: type):
-        # if isinstance(evento, EventoOrdenCreada):
-        #     return ProgramarRuta(
-        #         fecha_creacion=evento.fecha_creacion,
-        #         fecha_actualizacion=evento.fecha_actualizacion,
-        #         id=evento.id,
-        #         ordenes=[],
-        #     )
+        if isinstance(evento, OrdenCreada):
+            return ProgramarRuta(
+                fecha_creacion=evento.fecha_creacion,
+                fecha_actualizacion=evento.fecha_creacion,
+                id=evento.id,
+                ordenes=[],
+            )
+
+        print('-'*10)
+        print(type(evento).__name__)
         return {}
         # raise NotImplementedError("El evento no es soportado por el coordinador")
         # TODO Transforma un evento en la entrada de un comando

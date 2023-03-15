@@ -100,15 +100,15 @@ def is_flask():
         return False
 
 def registrar_unidad_de_trabajo(serialized_obj):
-    from aeroalpes.config.uow import UnidadTrabajoSQLAlchemy
+    from bff.src.config.uow import UnidadTrabajoSQLAlchemy
     from flask import session
     
 
     session['uow'] = serialized_obj
 
 def flask_uow():
-    from flask import session
-    from aeroalpes.config.uow import UnidadTrabajoSQLAlchemy, UnidadTrabajoPulsar
+    from flask import session,
+    from bff.src.config.uow import UnidadTrabajoSQLAlchemy, UnidadTrabajoPulsar
     if session.get('uow'):
         return session['uow']
 
@@ -121,7 +121,7 @@ def flask_uow():
 
 def unidad_de_trabajo() -> UnidadTrabajo:
     if is_flask():
-        return pickle.loads(flask_uow())
+       return pickle.loads(flask_uow())
     else:
         raise Exception('No hay unidad de trabajo')
 

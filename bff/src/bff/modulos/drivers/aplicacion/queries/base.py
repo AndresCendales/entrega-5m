@@ -1,6 +1,6 @@
-from alpesonline.seedwork.aplicacion.queries import QueryHandler
-from alpesonline.modulos.drivers.infraestructura.fabricas import FabricaVista
-from alpesonline.modulos.drivers.dominio.fabricas import FabricaRutas
+from bff.src.bff.seedwork.aplicacion.queries import QueryHandler
+from bff.src.bff.modulos.drivers.infraestructura.fabricas import FabricaVista
+from bff.src.bff.modulos.drivers.dominio.fabricas import FabricaRutas
 
 class ReservaQueryBaseHandler(QueryHandler):
     def __init__(self):

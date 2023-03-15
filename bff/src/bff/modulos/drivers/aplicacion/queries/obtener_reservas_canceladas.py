@@ -1,4 +1,4 @@
-from alpesonline.seedwork.aplicacion.queries import Query, QueryHandler, ResultadoQuery
+from bff.src.bff.seedwork.aplicacion.queries import Query, QueryHandler, ResultadoQuery
 
 
 class ObtenerReservasCanceladas(Query):
