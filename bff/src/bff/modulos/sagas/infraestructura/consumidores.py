@@ -6,7 +6,7 @@ import logging
 import traceback
 import datetime
 
-# from alpesonline.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
+from bff.src.bff.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
 # from alpesonline.modulos.ordenes.infraestructura.schema.v1.comandos import ComandoCrearOrden
 
 # from alpesonline.modulos.ordenes.infraestructura.proyecciones import ProyeccionOrdenesLista
@@ -20,7 +20,7 @@ def suscribirse_a_eventos(app=None):
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
         consumidor = cliente.subscribe('eventos-orden', consumer_type=_pulsar.ConsumerType.Shared,
                                        subscription_name='alpesonline-sub-eventos',
-                                       # schema=AvroSchema(EventoOrdenCreada)
+                                       schema=AvroSchema(EventoOrdenCreada)
         )
         while True:
             mensaje = consumidor.receive()
