@@ -23,10 +23,11 @@ def comenzar_consumidor(app):
     """
 
     import threading
-    import src.bff.modulos.sagas.infraestructura.consumidores as vuelos
+    import src.bff.modulos.sagas.infraestructura.consumidores as c
 
     # Suscripción a eventos
-    threading.Thread(target=vuelos.suscribirse_a_eventos, args=[app]).start()
+    threading.Thread(target=c.suscribirse_a_eventos_ordenes, args=[app]).start()
+    threading.Thread(target=c.suscribirse_a_eventos_ruta, args=[app]).start()
 
     # Suscripción a comandos
     # threading.Thread(target=vuelos.suscribirse_a_comandos, args=[app]).start()
