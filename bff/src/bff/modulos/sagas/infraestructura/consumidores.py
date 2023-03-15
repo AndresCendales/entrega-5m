@@ -11,7 +11,7 @@ import datetime
 
 # from alpesonline.modulos.ordenes.infraestructura.proyecciones import ProyeccionOrdenesLista
 # from alpesonline.seedwork.infraestructura.proyecciones import ejecutar_proyeccion
-# from alpesonline.seedwork.infraestructura import utils
+from bff.src.bff.seedwork.infraestructura import utils
 
 
 def suscribirse_a_eventos(app=None):
