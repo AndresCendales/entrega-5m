@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8514690a-82ce-4ed7-96cd-5f45ad91265b" name="Changes" comment="" />
+    <list default="true" id="8514690a-82ce-4ed7-96cd-5f45ad91265b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +33,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/andrescendales/uniandes/apps_no_monoliticas/entrega5 copy/bff/src",
+    "last_opened_file_path": "/Users/andrescendales/uniandes/apps_no_monoliticas/entrega5 copy/bff/src/bff/modulos",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -48,11 +50,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bff/src/bff/modulos" />
       <recent name="$PROJECT_DIR$/bff/src" />
       <recent name="$PROJECT_DIR$/bff" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/bff" />
-      <recent name="$PROJECT_DIR$/src/bff/api" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />

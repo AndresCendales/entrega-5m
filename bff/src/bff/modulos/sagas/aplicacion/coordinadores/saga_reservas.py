@@ -4,12 +4,12 @@ sys.path.append('..')
 from bff.src.bff.seedwork.aplicacion.sagas import CoordinadorOrquestacion, Transaccion, Inicio, Fin
 from bff.src.bff.seedwork.dominio.eventos import EventoDominio
 
-from ordenes.src.alpesonline.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrden
-from ordenes.src.alpesonline.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
-from rutas.src.alpesonline.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
-from rutas.src.alpesonline.modulos.rutas.infraestructura.schema.v1.eventos import EventoRutaProgramada
-from drivers.src.alpesonline.modulos.drivers.aplicacion.comandos.crear_reserva import AsignarRuta
-from drivers.src.alpesonline.modulos.drivers.infraestructura.schema.v1.eventos import EventoRutaAsignada
+# from bff.src.bff.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrden
+# from bff.src.bff.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
+# from bff.src.bff.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
+# from bff.src.bff.modulos.rutas.infraestructura.schema.v1.eventos import EventoRutaProgramada
+# from bff.src.bff.modulos.drivers.aplicacion.comandos.crear_reserva import AsignarRuta
+# from bff.src.bff.modulos.drivers.infraestructura.schema.v1.eventos import EventoRutaAsignada
 
 
 class CoordinadorOrdenes(CoordinadorOrquestacion):
@@ -19,22 +19,22 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
             Inicio(index=0),
             Transaccion(
                 index=1,
-                comando=CrearOrden,
-                evento=EventoOrdenCreada,
+                # comando=CrearOrden,
+                # evento=EventoOrdenCreada,
                 error=None,
                 compensacion=None
             ),
             Transaccion(
                 index=2,
-                comando=ProgramarRuta,
-                evento=EventoRutaProgramada,
+                # comando=ProgramarRuta,
+                # evento=EventoRutaProgramada,
                 error=None,
                 compensacion=None
             ),
             Transaccion(
                 index=3,
-                comando=AsignarRuta,
-                evento=EventoRutaAsignada,
+                # comando=AsignarRuta,
+                # evento=EventoRutaAsignada,
                 error=None,
                 compensacion=None
             ),
@@ -54,14 +54,15 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
         ...
 
     def construir_comando(self, evento: EventoDominio, tipo_comando: type):
-        if isinstance(evento, EventoOrdenCreada):
-            return ProgramarRuta(
-                fecha_creacion=evento.fecha_creacion,
-                fecha_actualizacion=evento.fecha_actualizacion,
-                id=evento.id,
-                ordenes=[],
-            )
-        raise NotImplementedError("El evento no es soportado por el coordinador")
+        # if isinstance(evento, EventoOrdenCreada):
+        #     return ProgramarRuta(
+        #         fecha_creacion=evento.fecha_creacion,
+        #         fecha_actualizacion=evento.fecha_actualizacion,
+        #         id=evento.id,
+        #         ordenes=[],
+        #     )
+        return {}
+        # raise NotImplementedError("El evento no es soportado por el coordinador")
         # TODO Transforma un evento en la entrada de un comando
         # Por ejemplo si el evento que llega es ReservaCreada y el tipo_comando es PagarReserva
         # Debemos usar los atributos de ReservaCreada para crear el comando PagarReserva
