@@ -1,12 +1,15 @@
-from bff.seedwork.aplicacion.sagas import CoordinadorOrquestacion, Transaccion, Inicio, Fin
-from bff.seedwork.dominio.eventos import EventoDominio
+import sys
 
-from ordenes.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrden
-from ordenes.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
-from rutas.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
-from rutas.modulos.rutas.infraestructura.schema.v1.eventos import EventoRutaProgramada
-from drivers.modulos.drivers.aplicacion.comandos.asignar_ruta import AsignarRuta
-from drivers.modulos.drivers.infraestructura.schema.v1.eventos import EventoRutaAsignada
+sys.path.append('..')
+from bff.src.bff.seedwork.aplicacion.sagas import CoordinadorOrquestacion, Transaccion, Inicio, Fin
+from bff.src.bff.seedwork.dominio.eventos import EventoDominio
+
+from ordenes.src.alpesonline.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrden
+from ordenes.src.alpesonline.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
+from rutas.src.alpesonline.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
+from rutas.src.alpesonline.modulos.rutas.infraestructura.schema.v1.eventos import EventoRutaProgramada
+from drivers.src.alpesonline.modulos.drivers.aplicacion.comandos.crear_reserva import AsignarRuta
+from drivers.src.alpesonline.modulos.drivers.infraestructura.schema.v1.eventos import EventoRutaAsignada
 
 
 class CoordinadorOrdenes(CoordinadorOrquestacion):
@@ -45,12 +48,20 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
         self.persistir_en_saga_log(self.pasos[-1])
 
     def persistir_en_saga_log(self, mensaje):
-        print('persistiendo',mensaje)
+        print('persistiendo', mensaje)
         # TODO Persistir estado en DB
         # Probablemente usted podría usar un repositorio para ello
         ...
 
     def construir_comando(self, evento: EventoDominio, tipo_comando: type):
+        if isinstance(evento, EventoOrdenCreada):
+            return ProgramarRuta(
+                fecha_creacion=evento.fecha_creacion,
+                fecha_actualizacion=evento.fecha_actualizacion,
+                id=evento.id,
+                ordenes=[],
+            )
+        raise NotImplementedError("El evento no es soportado por el coordinador")
         # TODO Transforma un evento en la entrada de un comando
         # Por ejemplo si el evento que llega es ReservaCreada y el tipo_comando es PagarReserva
         # Debemos usar los atributos de ReservaCreada para crear el comando PagarReserva

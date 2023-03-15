@@ -12,7 +12,7 @@ import datetime
 # from alpesonline.modulos.ordenes.infraestructura.proyecciones import ProyeccionOrdenesLista
 # from alpesonline.seedwork.infraestructura.proyecciones import ejecutar_proyeccion
 from bff.src.bff.seedwork.infraestructura import utils
-
+from bff.src.bff.modulos.sagas.aplicacion.coordinadores.saga_reservas import oir_mensaje
 
 def suscribirse_a_eventos(app=None):
     cliente = None
@@ -22,9 +22,9 @@ def suscribirse_a_eventos(app=None):
                                        subscription_name='alpesonline-sub-eventos',
                                        # schema=AvroSchema(EventoOrdenCreada)
         )
-
         while True:
             mensaje = consumidor.receive()
+            oir_mensaje(mensaje)
             datos = mensaje.value().data
             print(f'Evento recibido: {datos}')
 
