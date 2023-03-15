@@ -16,3 +16,11 @@ class OrdenCreada(EventoOrden):
     tipo: str = None
     productos: list = None
     fecha_creacion: datetime = None
+
+@dataclass
+class OrdenCreadaFallida(EventoOrden):
+    id_orden: uuid.UUID = None
+    id_cliente: uuid.UUID = None
+    tipo: str = None
+    productos: list = None
+    fecha_creacion: datetime = None

@@ -5,11 +5,13 @@ from bff.src.bff.seedwork.aplicacion.sagas import CoordinadorOrquestacion, Trans
 from bff.src.bff.seedwork.dominio.eventos import EventoDominio
 
 #from bff.src.bff.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrden
-from bff.src.bff.modulos.ordenes.dominio.eventos import OrdenCreada
+from bff.src.bff.modulos.ordenes.dominio.eventos import OrdenCreada,OrdenCreadaFallida
+
 # from bff.src.bff.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
-# from bff.src.bff.modulos.rutas.infraestructura.schema.v1.eventos import EventoRutaProgramada
+from bff.src.bff.modulos.rutas.dominio.eventos import RutaProgramada,RutaProgramadaFallida
+
 # from bff.src.bff.modulos.drivers.aplicacion.comandos.crear_reserva import AsignarRuta
-# from bff.src.bff.modulos.drivers.infraestructura.schema.v1.eventos import EventoRutaAsignada
+from bff.src.bff.modulos.drivers.dominio.eventos import RutaAsignada,RutaAsignadaFallida
 
 
 class CoordinadorOrdenes(CoordinadorOrquestacion):
@@ -21,23 +23,23 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
                 index=1,
                 comando=None, #
                 evento=OrdenCreada,
-                error=None,
+                error=OrdenCreadaFallida,
                 compensacion=None,
                 exitosa=True
             ),
             Transaccion(
                 index=2,
                 comando=None, #
-                evento=None,#
-                error=None,
+                evento=RutaProgramada,#
+                error=RutaProgramadaFallida,
                 compensacion=None,
                 exitosa=True
             ),
             Transaccion(
                 index=3,
                 comando=None,#
-                evento=None,#
-                error=None,
+                evento=RutaAsignada,#
+                error=RutaAsignadaFallida,
                 compensacion=None,
                 exitosa=True
             ),
