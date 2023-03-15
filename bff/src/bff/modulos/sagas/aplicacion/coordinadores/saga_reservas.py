@@ -4,7 +4,7 @@ sys.path.append('..')
 from bff.src.bff.seedwork.aplicacion.sagas import CoordinadorOrquestacion, Transaccion, Inicio, Fin
 from bff.src.bff.seedwork.dominio.eventos import EventoDominio
 
-#from bff.src.bff.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrden
+from bff.src.bff.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrden
 from bff.src.bff.modulos.ordenes.dominio.eventos import OrdenCreada,OrdenCreadaFallida
 
 # from bff.src.bff.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
@@ -21,7 +21,7 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
             Inicio(index=0),
             Transaccion(
                 index=1,
-                comando=None, #
+                comando=CrearOrden, 
                 evento=OrdenCreada,
                 error=OrdenCreadaFallida,
                 compensacion=None,
