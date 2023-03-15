@@ -8,7 +8,8 @@ from bff.src.bff.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrd
 from bff.src.bff.modulos.ordenes.aplicacion.comandos.cancelar_orden import CancelarOrden
 from bff.src.bff.modulos.ordenes.dominio.eventos import OrdenCreada,OrdenCreadaFallida
 
-# from bff.src.bff.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
+from bff.src.bff.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
+from bff.src.bff.modulos.rutas.aplicacion.comandos.cancelar_ruta import CancelarRuta
 from bff.src.bff.modulos.rutas.dominio.eventos import RutaProgramada,RutaProgramadaFallida
 
 # from bff.src.bff.modulos.drivers.aplicacion.comandos.crear_reserva import AsignarRuta
@@ -30,10 +31,10 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
             ),
             Transaccion(
                 index=2,
-                comando=None, #
+                comando=ProgramarRuta, #
                 evento=RutaProgramada,#
                 error=RutaProgramadaFallida,
-                compensacion=None,
+                compensacion=CancelarOrden,
                 exitosa=True
             ),
             Transaccion(
