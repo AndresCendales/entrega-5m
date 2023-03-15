@@ -1,5 +1,5 @@
 from pulsar.schema import *
-from alpesonline.seedwork.infraestructura.schema.v1.comandos import (ComandoIntegracion)
+from bff.src.bff.seedwork.infraestructura.schema.v1.comandos import (ComandoIntegracion)
 
 class ComandoAsignarDriverPayload(ComandoIntegracion):
     id_usuario = String()

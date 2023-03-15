@@ -9,10 +9,11 @@ from bff.src.bff.modulos.ordenes.aplicacion.comandos.cancelar_orden import Cance
 from bff.src.bff.modulos.ordenes.dominio.eventos import OrdenCreada,OrdenCreadaFallida
 
 from bff.src.bff.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
-from bff.src.bff.modulos.rutas.aplicacion.comandos.cancelar_ruta import CancelarRuta
+#from bff.src.bff.modulos.rutas.aplicacion.comandos.cancelar_ruta import CancelarRuta
 from bff.src.bff.modulos.rutas.dominio.eventos import RutaProgramada,RutaProgramadaFallida
 
-# from bff.src.bff.modulos.drivers.aplicacion.comandos.crear_reserva import AsignarRuta
+from bff.src.bff.modulos.drivers.aplicacion.comandos.crear_asignacion import AsignarRuta as AsignarDriver
+from bff.src.bff.modulos.drivers.aplicacion.comandos.cancelar_asignacion import CancelarAsignacion
 from bff.src.bff.modulos.drivers.dominio.eventos import RutaAsignada,RutaAsignadaFallida
 
 
@@ -34,15 +35,15 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
                 comando=ProgramarRuta, #
                 evento=RutaProgramada,#
                 error=RutaProgramadaFallida,
-                compensacion=CancelarOrden,
+                compensacion=None,
                 exitosa=True
             ),
             Transaccion(
                 index=3,
-                comando=None,#
+                comando=AsignarDriver,
                 evento=RutaAsignada,#
                 error=RutaAsignadaFallida,
-                compensacion=None,
+                compensacion=CancelarAsignacion,
                 exitosa=True
             ),
             Fin(index=5)
