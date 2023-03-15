@@ -5,6 +5,7 @@ from bff.src.bff.seedwork.aplicacion.sagas import CoordinadorOrquestacion, Trans
 from bff.src.bff.seedwork.dominio.eventos import EventoDominio
 
 from bff.src.bff.modulos.ordenes.aplicacion.comandos.crear_orden import CrearOrden
+from bff.src.bff.modulos.ordenes.aplicacion.comandos.cancelar_orden import CancelarOrden
 from bff.src.bff.modulos.ordenes.dominio.eventos import OrdenCreada,OrdenCreadaFallida
 
 # from bff.src.bff.modulos.rutas.aplicacion.comandos.programar_ruta import ProgramarRuta
@@ -24,7 +25,7 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
                 comando=CrearOrden, 
                 evento=OrdenCreada,
                 error=OrdenCreadaFallida,
-                compensacion=None,
+                compensacion=CancelarOrden,
                 exitosa=True
             ),
             Transaccion(
