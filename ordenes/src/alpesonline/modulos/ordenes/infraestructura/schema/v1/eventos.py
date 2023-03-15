@@ -6,7 +6,7 @@ import uuid
 class OrdenCreadaPayload(Record):
     id_orden = String()
     id_cliente = String()
-    tipo = String()
+    tipo = String() 
     fecha_creacion = Long()
 
 class EventoOrdenCreada(EventoIntegracion):

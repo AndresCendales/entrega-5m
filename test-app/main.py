@@ -1,7 +1,9 @@
+import sys 
+sys.path.append('..')
+
 import pulsar, _pulsar
 from pulsar.schema import *
-from rutas.modulos.rutas.infraestructura.schema.v1.eventos import EventoRutaProgramada
-from ordenes.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
+from ordenes.src.alpesonline.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
 import logging
 import traceback
 
