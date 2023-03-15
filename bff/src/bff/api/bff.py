@@ -8,22 +8,21 @@ from drivers.modulos.drivers.aplicacion.mapeadores import MapeadorRutaDTOJson
 from drivers.seedwork.aplicacion.comandos import ejecutar_commando
 from drivers.modulos.drivers.aplicacion.comandos.asignar_ruta import AsignarRuta
 
-bp = api.crear_blueprint('drivers', '/drivers')
+bp = api.crear_blueprint('ordenes', '/ordenes')
 
 
-@bp.route('/rutas', methods=('POST',))
-def asignar_ruta_comando():
+@bp.route('/', methods=('POST',))
+def crear_usando_comando():
     try:
-        # NOTE Asignamos el valor 'pulsar' para usar la Unidad de trabajo de Pulsar y 
-        # no la defecto de SQLAlchemy
         session['uow_metodo'] = 'pulsar'
 
-        ruta_dict = request.json
+        orden_dict = request.json
 
-        map_ruta = MapeadorRutaDTOJson()
-        ruta_dto = map_ruta.externo_a_dto(ruta_dict)
+        map_orden = MapeadorOrdenDTOJson()
+        orden_dto = map_orden.externo_a_dto(orden_dict)
 
-        comando = AsignarRuta(ruta=ruta_dto)
+        comando = CrearOrden(orden_dto.fecha_creacion, orden_dto.fecha_actualizacion, orden_dto.id, orden_dto.client_id,
+                             orden_dto.origen, orden_dto.destino, orden_dto.tipo, orden_dto.productos)
 
         ejecutar_commando(comando)
 

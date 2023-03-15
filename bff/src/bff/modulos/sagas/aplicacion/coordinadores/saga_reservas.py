@@ -45,6 +45,7 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
         self.persistir_en_saga_log(self.pasos[-1])
 
     def persistir_en_saga_log(self, mensaje):
+        print('persistiendo',mensaje)
         # TODO Persistir estado en DB
         # Probablemente usted podría usar un repositorio para ello
         ...
