@@ -8,12 +8,10 @@ import datetime
 
 from bff.src.bff.modulos.ordenes.infraestructura.schema.v1.eventos import EventoOrdenCreada
 from bff.src.bff.modulos.rutas.infraestructura.schema.v1.eventos import EventoRutaProgramada
+from bff.src.bff.modulos.drivers.infraestructura.schema.v1.eventos import EventoRutaAsignada as EventoDriverAsignado
 from bff.src.bff.modulos.ordenes.dominio.eventos import OrdenCreada
 from bff.src.bff.modulos.rutas.dominio.eventos import RutaProgramada
-# from alpesonline.modulos.ordenes.infraestructura.schema.v1.comandos import ComandoCrearOrden
-
-# from alpesonline.modulos.ordenes.infraestructura.proyecciones import ProyeccionOrdenesLista
-# from alpesonline.seedwork.infraestructura.proyecciones import ejecutar_proyeccion
+from bff.src.bff.modulos.drivers.dominio.eventos import RutaAsignada as DriverAsignado
 from bff.src.bff.seedwork.infraestructura import utils
 from bff.src.bff.modulos.sagas.aplicacion.coordinadores.saga_reservas import oir_mensaje
 
@@ -73,3 +71,37 @@ def suscribirse_a_eventos_ruta(app=None):
         traceback.print_exc()
         if cliente:
             cliente.close()
+
+
+def suscribirse_a_eventos_drivers(app=None):
+    # return
+    cliente = None
+    try:
+        cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
+        consumidor = cliente.subscribe(
+            'eventos-drivers',
+            consumer_type=_pulsar.ConsumerType.Shared,
+            subscription_name='bff-sub-eventos-drivers',
+            schema=AvroSchema(EventoDriverAsignado)
+        )
+
+        while True:
+            mensaje = consumidor.receive()
+            datos = mensaje.value().data
+            print(f'Evento drivers recibido: {datos}')
+            oir_mensaje(DriverAsignado(
+                ruta_id=datos.ruta_id,
+                driver_id=datos.driver_id,
+                estado=datos.estado,
+                fecha_asignacion=datetime.datetime.fromtimestamp(datos.fecha_creacion / 1000.0)
+            )) 
+            
+            consumidor.acknowledge(mensaje)     
+
+        cliente.close()
+    except:
+        logging.error('ERROR: Suscribiendose al tópico de eventos!')
+        traceback.print_exc()
+        if cliente:
+            cliente.close()
+

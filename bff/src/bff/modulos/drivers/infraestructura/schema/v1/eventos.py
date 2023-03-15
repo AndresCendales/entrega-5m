@@ -1,6 +1,6 @@
 from pulsar.schema import *
-from alpesonline.seedwork.infraestructura.schema.v1.eventos import EventoIntegracion
-from alpesonline.seedwork.infraestructura.utils import time_millis
+from bff.src.bff.seedwork.infraestructura.schema.v1.eventos import EventoIntegracion
+from bff.src.bff.seedwork.infraestructura.utils import time_millis
 import uuid
 
 

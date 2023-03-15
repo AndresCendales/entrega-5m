@@ -18,7 +18,7 @@ def suscribirse_a_eventos(app=None):
     try:
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
         consumidor = cliente.subscribe(
-            'eventos-rutas',
+            'eventos-drivers',
             consumer_type=_pulsar.ConsumerType.Shared,
             subscription_name='aeroalpes-sub-eventos',
             schema=AvroSchema(EventoRutaAsignada)

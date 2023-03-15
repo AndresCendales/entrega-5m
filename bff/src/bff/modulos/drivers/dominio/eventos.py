@@ -21,7 +21,7 @@ class RutaAsignadaFallida(EventoRutaAsignada):
     ruta_id: uuid.UUID = None
     driver_id: uuid.UUID = None
     estado: str = None
-    fecha_asignacion: datetime = None
+    ç: datetime = None
 # @dataclass
 # class ReservaCancelada(EventoReserva):
 #     id_reserva: uuid.UUID = None
