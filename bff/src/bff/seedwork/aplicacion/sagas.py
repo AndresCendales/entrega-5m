@@ -19,8 +19,8 @@ class CoordinadorSaga(ABC):
         ...
 
     def publicar_comando(self, evento: EventoDominio, tipo_comando: type):
+        print(f'comando publicado {evento}')
         comando = self.construir_comando(evento, tipo_comando)
-        ejecutar_commando(comando)
 
     @abstractmethod
     def inicializar_pasos(self):
@@ -86,17 +86,12 @@ class CoordinadorOrquestacion(CoordinadorSaga, ABC):
         raise Exception("Evento no hace parte de la transacción")
 
     def es_ultima_transaccion(self, index):
-        return len(self.pasos) == 1
+        return len(self.pasos) == index +2
 
     def procesar_evento(self, evento: EventoDominio):
         print('*'*10)
         print(type(evento).__name__)
-
         paso, index = self.obtener_paso_dado_un_evento(evento)
-        print(isinstance(evento, paso.evento))
-        print(paso)
-        print(index)
-        print(self.es_ultima_transaccion(index))
         if self.es_ultima_transaccion(index) and not isinstance(evento, paso.error):
             print('terminando...')
             self.terminar()

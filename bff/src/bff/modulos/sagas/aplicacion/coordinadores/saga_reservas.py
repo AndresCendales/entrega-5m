@@ -62,6 +62,8 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
         ...
 
     def construir_comando(self, evento: EventoDominio, tipo_comando: type):
+        print('-'*10)
+        print(type(evento).__name__)
         if isinstance(evento, OrdenCreada):
             return ProgramarRuta(
                 fecha_creacion=evento.fecha_creacion,
@@ -69,18 +71,12 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
                 id=evento.id,
                 ordenes=[],
             )
-
-        print('-'*10)
-        print(type(evento).__name__)
+        elif isinstance(evento,RutaProgramada):
+            return AsignarDriver(
+                ruta=evento.id
+            )
         return {}
-        # raise NotImplementedError("El evento no es soportado por el coordinador")
-        # TODO Transforma un evento en la entrada de un comando
-        # Por ejemplo si el evento que llega es ReservaCreada y el tipo_comando es PagarReserva
-        # Debemos usar los atributos de ReservaCreada para crear el comando PagarReserva
-        ...
 
-
-# TODO Agregue un Listener/Handler para que se puedan redireccionar eventos de dominio
 def oir_mensaje(mensaje):
     if isinstance(mensaje, EventoDominio):
         coordinador = CoordinadorOrdenes()
