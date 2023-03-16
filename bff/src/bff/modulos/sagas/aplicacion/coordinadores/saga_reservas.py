@@ -56,10 +56,11 @@ class CoordinadorOrdenes(CoordinadorOrquestacion):
         self.persistir_en_saga_log(self.pasos[-1])
 
     def persistir_en_saga_log(self, mensaje):
+        print("-"*100)
         print('persistiendo', mensaje)
-        # TODO Persistir estado en DB
-        # Probablemente usted podría usar un repositorio para ello
-        ...
+        # from bff.src.config.db import db
+        # from bff.src.bff.modulos.sagas.infraestructura.dto import Eventos
+        # Eventos(evento=str(mensaje)).save()
 
     def construir_comando(self, evento: EventoDominio, tipo_comando: type):
         print('-'*10)
