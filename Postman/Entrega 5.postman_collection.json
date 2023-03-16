@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "e76313fc-9faa-4398-9598-c344942fc6ae",
+		"name": "Entrega 5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17477086"
+	},
+	"item": [
+		{
+			"name": "Microservicios",
+			"item": [
+				{
+					"name": "Ordenes",
+					"item": [
+						{
+							"name": "CrearOrden_",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "session=.eJwtzd0KgjAYgOFbie-4kxY7yDMTZn8aKJttJ7EtE21Dac0w8d4z6L2A9xnBt28IRlgoCKAKc5ZV4b8oIZY4HbOPQtjJApuTTXtlRScGvFLrkjbblClrHrzIqLak5kXX0x1zGpHBHM70yGN6F3kSkU3NL1kj55chiGq09zAtf_bVlq_21s54542TT5i-2LsxQg.ZAf8qw.o_2Q8M-ZlyXz6Fv9M_C_eQKF3tA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"client_id\": \"ccaf1d6b-9ca6-4774-93df-2aca6f7be0df\",\n  \"tipo\": \"mercado\",\n  \"origen\": {\n      \"longitud\": \"123\",\n      \"latitud\": \"456\"\n  },\n  \"destino\": {\n      \"longitud\": \"123\",\n      \"latitud\": \"456\"\n  },\n  \"productos\": [\n    {\n      \"id\":  \"ccaf1d6b-9ca6-4774-93df-2aca6f7be0dg\",\n      \"nombre\": \"arroz\"\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "https://5001-andrescendale-entrega5m-l2715tpoms4.ws-us90.gitpod.io/ordenes/",
+									"protocol": "https",
+									"host": [
+										"5001-andrescendale-entrega5m-l2715tpoms4",
+										"ws-us90",
+										"gitpod",
+										"io"
+									],
+									"path": [
+										"ordenes",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rutas",
+					"item": [
+						{
+							"name": "Crear Ruta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\":\"\",\n    \"origen\":{\n        \"lat\":1,\n        \"lng\":2\n    },\n    \"destino\":{\n        \"lat\":1,\n        \"lng\":2\n    },\n    \"tipo\":\"tarjetas\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{RUTAS_URL}}/rutas/programa",
+									"host": [
+										"{{RUTAS_URL}}"
+									],
+									"path": [
+										"rutas",
+										"programa"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Drivers",
+					"item": [
+						{
+							"name": "Asignar Ruta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ruta_id\":\"c3760c77-c598-418a-bebc-6093f43fe437\",\n    \"ordenes\": [\n        {\n            \"id\": \"c3760c77-c598-418a-bebc-6093f43fe437\",\n            \"origen\": {\n                \"lat\": 0,\n                \"lon\": 0\n            },\n            \"destino\": {\n                \"lat\": 0,\n                \"lon\": 0\n            },\n            \"tipo\": \"tarjeta\",\n            \"parada\": 1\n        }\n    ],\n    \"zona\": \"norte\",\n    \"tiempo_estimado\":10,\n    \"hora_salida\": \"2023-11-22T13:10:00Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://5000-andrescenda-driversserv-8zjuvpcoxye.ws-us89b.gitpod.io/drivers/rutas",
+									"protocol": "https",
+									"host": [
+										"5000-andrescenda-driversserv-8zjuvpcoxye",
+										"ws-us89b",
+										"gitpod",
+										"io"
+									],
+									"path": [
+										"drivers",
+										"rutas"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Bff",
+			"item": [
+				{
+					"name": "Crear Orden BFF",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "session=.eJwtzd0KgjAYgOFbie-4kxY7yDMTZn8aKJttJ7EtE21Dac0w8d4z6L2A9xnBt28IRlgoCKAKc5ZV4b8oIZY4HbOPQtjJApuTTXtlRScGvFLrkjbblClrHrzIqLak5kXX0x1zGpHBHM70yGN6F3kSkU3NL1kj55chiGq09zAtf_bVlq_21s54542TT5i-2LsxQg.ZAf8qw.o_2Q8M-ZlyXz6Fv9M_C_eQKF3tA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"client_id\": \"ccaf1d6b-9ca6-4774-93df-2aca6f7be0df\",\n  \"tipo\": \"mercado\",\n  \"origen\": {\n      \"longitud\": \"123\",\n      \"latitud\": \"456\"\n  },\n  \"destino\": {\n      \"longitud\": \"123\",\n      \"latitud\": \"456\"\n  },\n  \"productos\": [\n    {\n      \"id\":  \"ccaf1d6b-9ca6-4774-93df-2aca6f7be0dg\",\n      \"nombre\": \"arroz\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "https://5000-andrescendale-entrega5m-l2715tpoms4.ws-us90.gitpod.io/ordenes/",
+							"protocol": "https",
+							"host": [
+								"5000-andrescendale-entrega5m-l2715tpoms4",
+								"ws-us90",
+								"gitpod",
+								"io"
+							],
+							"path": [
+								"ordenes",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
